@@ -6,13 +6,16 @@ class Block
     @data = data
   end
 
-
   def explain
-    p "==== Block ==== "
+    p '==== Block ==== '
     p "Timestamp: #{@timestamp}"
     p "last_hash: #{@last_hash}"
     p "hash_value: #{@hash_value}"
     p "data: #{@data}"
-    p "==== Block ==== "
+    p '==== Block ==== '
+  end
+
+  def self.genesis
+    Block.new('Genesis time', '----', 'asd33psad1123', [])
   end
 end
