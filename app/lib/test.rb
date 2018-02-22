@@ -11,7 +11,6 @@ end
 # t = Test.genesis
 # t.explain
 
-
 # Create the next block
-# t = Test.mine_block(Test.genesis, '12312')
-# t.explain
+t = Test.mine_block(Test.genesis, '12312')
+t.explain
