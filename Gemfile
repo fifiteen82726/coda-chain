@@ -27,6 +27,12 @@ gem 'jbuilder', '~> 2.5'
 
 # self add
 gem 'rubocop', '~> 0.51.0', require: false
+
+# For pretty console output
+gem 'pry', '~> 0.11.3'
+gem 'pry-rails', '~> 0.3.4'
+gem 'pry-byebug', '~> 3.5.1'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
