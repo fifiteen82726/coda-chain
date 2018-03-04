@@ -1,36 +1,37 @@
 require 'openssl'
 
 class Block < ApplicationRecord
-  attr_accessor :timestamp, :last_hash, :hash_value, :data
-
-  belongs_to :block_chain
-
-  def initialize(timestamp, last_hash, hash_value, data)
-    @timestamp = timestamp
-    @last_hash = last_hash
-    @hash_value = hash_value
-    @data = data
-  end
+  belongs_to :block_chain, optional: true
 
   def explain
     p '==== Block ==== '
-    p "Timestamp: #{@timestamp}"
-    p "last_hash: #{@last_hash}"
-    p "hash_value: #{@hash_value}"
-    p "data: #{@data}"
+    p "Timestamp: #{created_at}"
+    p "last_hash: #{last_hash}"
+    p "hash_value: #{hash_value}"
+    p "data: #{data}"
     p '==== Block ==== '
   end
 
-  def self.genesis
-    Block.new('Genesis time', '----', 'asd33psad1123', [])
+  def self.genesis!(block_chain_id)
+    Block.create!(
+      last_hash: Digest::SHA256.hexdigest('first hash value'),
+      hash_value: Digest::SHA256.hexdigest('hash_value'),
+      data: 'data',
+      block_chain_id: block_chain_id,
+    )
   end
 
-  def self.mine_block(last_block, data)
-    timestamp = (Time.now.to_f * 1000).to_i # to milliseconds
+  def self.mine_block!(last_block, data, block_chain_id)
+    timestamp = Time.now.to_i
     last_hash = last_block.last_hash
     hash_value = Block.compute_hash_value(timestamp, last_hash, data)
 
-    Block.new(timestamp, last_hash, hash_value, data)
+    Block.create!(
+      last_hash: last_hash,
+      hash_value: hash_value,
+      data: data,
+      block_chain_id: block_chain_id,
+    )
   end
 
   def self.compute_hash_value(timestamp, last_hash, data)
