@@ -1,6 +1,6 @@
 require 'openssl'
 
-class Block
+class Block < ApplicationRecord
   attr_accessor :timestamp, :last_hash, :hash_value, :data
 
   def initialize(timestamp, last_hash, hash_value, data)

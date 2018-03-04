@@ -1,5 +1,3 @@
-require_relative 'block.rb'
-
 class Test < Block
 end
 
