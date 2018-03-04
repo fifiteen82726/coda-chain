@@ -10,6 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180304073905) do
+
+  create_table "block_chains", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "blocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "last_hash"
+    t.string "hash_value"
+    t.string "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "block_chain_id"
+    t.index ["block_chain_id"], name: "index_blocks_on_block_chain_id"
+  end
 
 end

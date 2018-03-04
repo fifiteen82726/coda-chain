@@ -3,6 +3,8 @@ require 'openssl'
 class Block < ApplicationRecord
   attr_accessor :timestamp, :last_hash, :hash_value, :data
 
+  belongs_to :block_chain
+
   def initialize(timestamp, last_hash, hash_value, data)
     @timestamp = timestamp
     @last_hash = last_hash
